@@ -6,9 +6,8 @@
         display: flex;
         font-family: sans-serif;
         font-size: 18pt;
-        color: #ffffff;
+        color: #191919;
         padding: 5px;
-        border: 1px solid #ffffff;
         justify-content: left;
         line-height: 1.5;
         height:85%;
@@ -27,7 +26,7 @@
       }
 
       body{
-          background-color: #000000;
+          background-color: #C94079;
       }
     </style>
 </head>
@@ -58,11 +57,11 @@
     var greet;
 
     if (hrs < 12)
-        greet = 'bom dia.  ';
+        greet = 'bom dia, maria.  ';
     else if (hrs >= 12 && hrs <= 17)
-        greet = 'boa tarde. ';
+        greet = 'boa tarde, maria, ';
     else if (hrs >= 17 && hrs <= 24)
-        greet = 'boa noite.  ';
+        greet = 'boa noite, maria.  ';
 
     document.getElementById('lbl').innerHTML = `
         <div class="container">
