@@ -6,6 +6,7 @@
         --color1: hsl(267, 84%, 81%, 1);
         --color2: hsl(41, 86%, 83%, 1);
         background-color: transparent;
+        margin: 0 !important;
       }
       #lbl {
         display: flex;
@@ -70,9 +71,9 @@
 
     var greet;
 
-    if (hrs < 12) greet = "✦ bom dia, maria.  ";
-    else if (hrs >= 12 && hrs <= 17) greet = "✦ boa tarde, maria. ";
-    else if (hrs >= 17 && hrs <= 24) greet = "✦ boa noite, maria.  ";
+    if (hrs < 12) greet = "Bom dia, maria.";
+    else if (hrs >= 12 && hrs <= 17) greet = "Boa tarde, maria.";
+    else if (hrs >= 17 && hrs <= 24) greet = "Boa noite, maria.";
 
     document.getElementById("lbl").innerHTML = `
         <div class="container">
