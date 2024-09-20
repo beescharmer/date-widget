@@ -5,7 +5,7 @@
       body {
         --color1: hsl(267, 84%, 81%, 1);
         --color2: hsl(41, 86%, 83%, 1);
-        --color3: hsl(240, 100%, 50%, 1);
+        background-color: #1E1E2E;
       }
       #lbl {
         display: flex;
@@ -28,26 +28,6 @@
         font-size: 9.5pt;
         font-weight: bold;
         color: var(--color2) !important;
-      }
-
-      body {
-        background-color: transparent;
-      }
-      .progress-container {
-        margin-top: 10px;
-        width: 100%;
-        background-color: transparent;
-        border-radius: 8px;
-        overflow: hidden;
-        height: 4px;
-      }
-      .progress-bar {
-        height: 100%;
-        /* background-color: var(--color1) ; */
-        background-image: linear-gradient(45deg, var(--color1), var(--color2) 100%);
-        width: 0%; /* Start with 0% width */
-        border-radius: 8px;
-        transition: width 0.5s ease; /* Smooth transition for width changes */
       }
     </style>
   </head>
@@ -86,7 +66,7 @@
     var dayOfWeek = weekday[today.getDay()];
     var date = `${dayOfWeek}, ${today.getDate()} de ${
       monthNames[today.getMonth()]
-    } de ${today.getFullYear()}. ${hrs}:${min}`;
+    } de ${today.getFullYear()},`;
 
     var greet;
 
@@ -97,37 +77,8 @@
     document.getElementById("lbl").innerHTML = `
         <div class="container">
           <div class="greeting">${greet}</div>
-          <div id="date"> ${date}</div>
-              <div class="progress-container">
-      <div id="progress-bar" class="progress-bar"></div>
-    </div>
+          <div id="date"> ${date} ${hrs}:${min}.</div>
         <div/>
     `;
-    function updateProgressBar() {
-      // Get the current time
-      var now = new Date();
-      var hrs = now.getHours();
-      var mins = now.getMinutes();
-
-      // Calculate the total minutes passed today
-      var totalMinutesPassed = hrs * 60 + mins;
-
-      // Total minutes in a day
-      var totalMinutesInDay = 24 * 60;
-
-      // Calculate percentage of the day passed
-      var percentageOfDayPassed =
-        (totalMinutesPassed / totalMinutesInDay) * 100;
-
-      // Update the progress bar width
-      var progressBar = document.getElementById("progress-bar");
-      progressBar.style.width = percentageOfDayPassed + "%";
-    }
-
-    // Update the progress bar when the page loads
-    updateProgressBar();
-
-    // Optionally, update the progress bar every minute to keep it in sync with real time
-    setInterval(updateProgressBar, 60000); // 60,000 ms = 1 minute
   </script>
 </html>
