@@ -1,11 +1,11 @@
-<html> 
-<head>
-    <title>Date Widget Notion</title> 
+<html>
+  <head>
+    <title>Date Widget Notion</title>
     <style>
       body {
-        --color1: #CBA6F7;
-        --color2: #F9E2AF;
-
+        --color1: hsl(267, 84%, 81%, 1);
+        --color2: hsl(41, 86%, 83%, 1);
+        --color3: hsl(240, 100%, 50%, 1);
       }
       #lbl {
         display: flex;
@@ -25,21 +25,37 @@
       }
 
       #date {
-          font-size: 9.5pt;
-          font-weight: bold;
-          color: var(--color2) !important;
+        font-size: 9.5pt;
+        font-weight: bold;
+        color: var(--color2) !important;
       }
 
       body {
-          background-color: transparent;
+        background-color: transparent;
+      }
+      .progress-container {
+        margin-top: 10px;
+        width: 100%;
+        background-color: transparent;
+        border-radius: 8px;
+        overflow: hidden;
+        height: 4px;
+      }
+      .progress-bar {
+        height: 100%;
+        /* background-color: var(--color1) ; */
+        background-image: linear-gradient(45deg, var(--color1), var(--color2) 100%);
+        width: 0%; /* Start with 0% width */
+        border-radius: 8px;
+        transition: width 0.5s ease; /* Smooth transition for width changes */
       }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="lbl"></div>
-</body>
+  </body>
 
-<script>
+  <script>
     var weekday = new Array(7);
     weekday[0] = "domingo";
     weekday[1] = "segunda";
@@ -49,30 +65,69 @@
     weekday[5] = "sexta";
     weekday[6] = "sábado";
 
-    const monthNames = ["janeiro", "fevereiro", "março", "abril", "maio", "junho",
-      "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
+    const monthNames = [
+      "janeiro",
+      "fevereiro",
+      "março",
+      "abril",
+      "maio",
+      "junho",
+      "julho",
+      "agosto",
+      "setembro",
+      "outubro",
+      "novembro",
+      "dezembro",
     ];
 
-    
     var today = new Date();
-    var hrs = today.getHours();
+    var hrs = String(today.getHours()).padStart(2, "0");
+    var min = String(today.getMinutes()).padStart(2, "0");
     var dayOfWeek = weekday[today.getDay()];
-    var date = `${dayOfWeek}, ${today.getDate()} de ${monthNames[today.getMonth()]} de ${today.getFullYear()}`;
+    var date = `${dayOfWeek}, ${today.getDate()} de ${
+      monthNames[today.getMonth()]
+    } de ${today.getFullYear()}. ${hrs}:${min}`;
 
     var greet;
 
-    if (hrs < 12)
-        greet = '✦ bom dia, maria.  ';
-    else if (hrs >= 12 && hrs <= 17)
-        greet = '✦ boa tarde, maria. ';
-    else if (hrs >= 17 && hrs <= 24)
-        greet = '✦ boa noite, maria.  ';
+    if (hrs < 12) greet = "✦ bom dia, maria.  ";
+    else if (hrs >= 12 && hrs <= 17) greet = "✦ boa tarde, maria. ";
+    else if (hrs >= 17 && hrs <= 24) greet = "✦ boa noite, maria.  ";
 
-    document.getElementById('lbl').innerHTML = `
+    document.getElementById("lbl").innerHTML = `
         <div class="container">
           <div class="greeting">${greet}</div>
           <div id="date"> ${date}</div>
+              <div class="progress-container">
+      <div id="progress-bar" class="progress-bar"></div>
+    </div>
         <div/>
     `;
-</script> 
+    function updateProgressBar() {
+      // Get the current time
+      var now = new Date();
+      var hrs = now.getHours();
+      var mins = now.getMinutes();
+
+      // Calculate the total minutes passed today
+      var totalMinutesPassed = hrs * 60 + mins;
+
+      // Total minutes in a day
+      var totalMinutesInDay = 24 * 60;
+
+      // Calculate percentage of the day passed
+      var percentageOfDayPassed =
+        (totalMinutesPassed / totalMinutesInDay) * 100;
+
+      // Update the progress bar width
+      var progressBar = document.getElementById("progress-bar");
+      progressBar.style.width = percentageOfDayPassed + "%";
+    }
+
+    // Update the progress bar when the page loads
+    updateProgressBar();
+
+    // Optionally, update the progress bar every minute to keep it in sync with real time
+    setInterval(updateProgressBar, 60000); // 60,000 ms = 1 minute
+  </script>
 </html>
