@@ -2,11 +2,20 @@
 <head>
     <title>Date Widget Notion</title> 
     <style>
+      .theme-dark {
+        --color1: #CBA6F7;
+        --color2: #F9E2AF;
+
+      }
+      .theme-light {
+        --color1: #9a2219;
+        --color2: #593e22;
+      }
       #lbl {
         display: flex;
         font-family: Inter;
         font-size: 15pt;
-        color: #73C7EC;
+        color: var(--color1);
         justify-content: left;
         line-height: 1.5;
         height: 85%;
@@ -22,7 +31,7 @@
       #date {
           font-size: 9.5pt;
           font-weight: bold;
-          color: #CDD6F4 !important;
+          color: var(--color2) !important;
       }
 
       body {
